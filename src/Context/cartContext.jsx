@@ -74,7 +74,7 @@ export default function CartcontextProvider({ children }) {
   };
   const checkOut = async (ShipingDetails) => {
     const data = await axios.post(
-      `${baseUrl}/api/v1/orders/checkout-session/${cartId}?url=http://localhost:5173`,
+      `${baseUrl}/api/v1/orders/checkout-session/${cartId}?url=https://freshcart.vercel.app`,
       { ShipingDetails },
       { headers }
     );

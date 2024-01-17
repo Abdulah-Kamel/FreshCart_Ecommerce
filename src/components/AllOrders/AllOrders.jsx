@@ -1,0 +1,144 @@
+import { useContext, useEffect, useState } from "react";
+import styles from "./AllOrders.module.css";
+import { Cartcontext } from "../../Context/cartContext";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
+const AllOrders = () => {
+  // const [orders, setOrders] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
+  const { getAllOrders } = useContext(Cartcontext);
+
+  let { data, isLoading, isError } = useQuery({
+    queryKey: ["orders", page],
+    queryFn: () => getAllOrders(page),
+    keepPreviousData: true,
+  });
+  console.log(data);
+
+  isError
+    ? toast.error(isError, {
+        position: "top-right",
+        duration: 1000,
+        className: "text-white bg-danger",
+      })
+    : null;
+  // const getOrders = async (page) => {
+  //   setLoading(true);
+  //   const data = await getAllOrders(page);
+  //   setOrders(data.data.data);
+  //   console.log(data.data.metadata);
+  //   setCurrentPage(data.data.metadata.currentPage);
+  //   setNextPage(data.data.metadata.nextPage);
+  //   setPrevPage(data.data.metadata.prevPage);
+  //   console.log(orders);
+  //   setLoading(false);
+  // };
+  // useEffect(() => {
+  //   getOrders();
+  // }, []);
+  return (
+    <section>
+      <section className="container bg-main-light my-5 p-4 rounded">
+        <h1>All Orders:</h1>
+        {isLoading ? (
+          <section className="d-flex justify-content-center align-items-center w-100 mt-5">
+            <BeatLoader color="#0aad0a" size={35} />
+          </section>
+        ) : (
+          <section className="row g-3">
+            {data?.data.data.slice(0, 10).map((order, index) => {
+              return (
+                <section key={index} className="mt-5">
+                  <section>
+                    <p>
+                      <span className="fw-bold me-1">Order Date:</span>{" "}
+                      {order.createdAt}
+                    </p>
+                    <p>
+                      <span className="fw-bold me-1">Order ID:</span>{" "}
+                      {order._id}
+                    </p>
+                    <p>
+                      <span className="fw-bold me-1">Status:</span>{" "}
+                      {order.isDelivered ? "Delivered" : "Not Delivered"}
+                    </p>
+                    <p>
+                      <span className="fw-bold me-1">paymentMethod:</span>{" "}
+                      {order.paymentMethodType}
+                    </p>
+                    <p>
+                      <span className="fw-bold me-1">Total:</span> $
+                      {order.totalOrderPrice}
+                    </p>
+                  </section>
+                </section>
+              );
+            })}
+          </section>
+        )}
+        {isLoading ? null : (
+          <nav aria-label="..." className="d-flex justify-content-center mt-3">
+            <ul className="pagination">
+              <li
+                className={`page-item ${
+                  data?.data.metadata.prevPage ? "" : "disabled"
+                }`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => setPage(data?.data.metadata.prevPage)}
+                >
+                  Previous
+                </button>
+              </li>
+              {data?.data.metadata.prevPage ? (
+                <li className="page-item">
+                  <button
+                    className="page-link"
+                    onClick={() => setPage(data?.data.metadata.prevPage)}
+                  >
+                    {data?.data.metadata.prevPage}
+                  </button>
+                </li>
+              ) : null}
+
+              <li className="page-item bg-main" aria-current="page">
+                <button
+                  className="page-link bg-main text-white"
+                  onClick={() => setPage(data?.data.metadata.currentPage)}
+                >
+                  {data?.data.metadata.currentPage}
+                </button>
+              </li>
+              {data?.data.metadata.nextPage ? (
+                <li className="page-item">
+                  <button
+                    className="page-link"
+                    onClick={() => setPage(data?.data.metadata.nextPage)}
+                  >
+                    {data?.data.metadata.nextPage}
+                  </button>
+                </li>
+              ) : null}
+
+              <li className="page-item">
+                <button
+                  className="page-link"
+                  onClick={() => setPage(data?.data.metadata.nextPage)}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        )}
+      </section>
+    </section>
+  );
+};
+
+export default AllOrders;

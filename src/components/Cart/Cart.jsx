@@ -24,7 +24,7 @@ const Cart = () => {
       });
     setLoading(false);
   };
-
+  console.log(cart);
   const updateCartCount = async (id, count) => {
     const data = await updateCart(id, count);
     if (data.data.status == "success") {

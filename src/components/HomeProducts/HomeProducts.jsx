@@ -85,20 +85,18 @@ const HomeProducts = () => {
                       {product.category.name}
                     </p>
                     <p className="fw-bold fs-5">
-                      {product.title.length > 18
-                        ? product.title.slice(0, 18) + "..."
-                        : product.title.slice(0, 18)}
+                      {product.title.split(" ").slice(0, 2).join(" ")}
                     </p>
                     <section className="d-flex justify-content-between align-items-center">
                       <span className="fw-bold">
-                        <span>{product.price}</span>{" "}
+                        <span>{product.price}</span>
                         <span className="ms-1">EGP</span>
                       </span>
                       <span>
                         <span>
                           <i className="fa fa-star rating-color me-1"></i>
                         </span>
-                        <span>{product.ratingsAverage}</span>{" "}
+                        <span>{product.ratingsAverage}</span>
                       </span>
                     </section>
                   </section>

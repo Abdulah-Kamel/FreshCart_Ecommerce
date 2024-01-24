@@ -56,16 +56,16 @@ const SingleProduct = () => {
   }, []);
 
   return (
-    <section className="py-5">
-      <ToastContainer />
-      <section className="container">
-        <section className="row g-0 gy-5 g-md-5">
-          {loading ? (
-            <section className="d-flex justify-content-between align-items-center w-100">
-              <BeatLoader color="#0aad0a" size={30} />
-            </section>
-          ) : (
-            <>
+    <>
+      {loading ? (
+        <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
+          <BeatLoader color="#0aad0a" size={30} />
+        </section>
+      ) : (
+        <section className="py-5">
+          <ToastContainer />
+          <section className="container">
+            <section className="row g-0 gy-5 g-md-5">
               <section className="col-md-4">
                 <Slider {...settings}>
                   {product.images.map((image, index) => {
@@ -117,11 +117,11 @@ const SingleProduct = () => {
                   </section>
                 </section>
               </section>
-            </>
-          )}
+            </section>
+          </section>
         </section>
-      </section>
-    </section>
+      )}
+    </>
   );
 };
 

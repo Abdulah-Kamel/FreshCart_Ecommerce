@@ -23,36 +23,38 @@ const Categories = () => {
   // }, []);
 
   return (
-    <section className="py-5">
-      <section className="container">
-        <h1>Categories:</h1>
-        <section className="row g-5">
-          {isLoading ? (
-            <section className="d-flex justify-content-center align-items-center w-100">
-              <BeatLoader color="#0aad0a" size={30} />
-            </section>
-          ) : (
-            data?.data.map((product, index) => {
-              return (
-                <section className="col-md-3" key={index}>
-                  <section>
-                    <Link to={`/categories/${product._id}`}>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-100 rounded"
-                        height={"350px"}
-                      />
-                    </Link>
-                    <p className="mt-3">{product.name}</p>
-                  </section>
-                </section>
-              );
-            })
-          )}
+    <>
+      {isLoading ? (
+        <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
+          <BeatLoader color="#0aad0a" size={30} />
         </section>
-      </section>
-    </section>
+      ) : (
+        <section className="py-5">
+          <section className="container">
+            <h1>Categories:</h1>
+            <section className="row g-5">
+              {data?.data.map((product, index) => {
+                return (
+                  <section className="col-md-3" key={index}>
+                    <section>
+                      <Link to={`/categories/${product._id}`}>
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-100 rounded"
+                          height={"350px"}
+                        />
+                      </Link>
+                      <p className="mt-3">{product.name}</p>
+                    </section>
+                  </section>
+                );
+              })}
+            </section>
+          </section>
+        </section>
+      )}
+    </>
   );
 };
 

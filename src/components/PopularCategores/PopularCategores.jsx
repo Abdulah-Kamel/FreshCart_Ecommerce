@@ -73,27 +73,22 @@ const PopularCategores = () => {
         <section>
           <h3>Shop Popular Categores</h3>
         </section>
-        {isLoading ? (
-          <section className="d-flex justify-content-center align-items-center w-100">
-            <BeatLoader color="#0aad0a" size={30} />
-          </section>
-        ) : (
-          <Slider {...settings}>
-            {data?.data.map((category) => (
-              <picture key={category._id}>
-                <Link to={`/categories/${category._id}`}>
-                  <img
-                    src={category.image}
-                    alt=""
-                    className="w-100"
-                    height={200}
-                  />
-                </Link>
-                <p className="text-center">{category.name}</p>
-              </picture>
-            ))}
-          </Slider>
-        )}
+
+        <Slider {...settings}>
+          {data?.data.map((category) => (
+            <picture key={category._id}>
+              <Link to={`/categories/${category._id}`}>
+                <img
+                  src={category.image}
+                  alt=""
+                  className="w-100"
+                  height={200}
+                />
+              </Link>
+              <p className="text-center">{category.name}</p>
+            </picture>
+          ))}
+        </Slider>
       </section>
     </>
   );

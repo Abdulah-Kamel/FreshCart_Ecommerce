@@ -38,6 +38,9 @@ body {
 }
 .bg-main {
   background-color: var(--main-color) !important;
+  &:hover {
+    background-color: #0b970b !important;
+  }
 }
 .bg-main-light {
   background-color: var(--light-color) !important;

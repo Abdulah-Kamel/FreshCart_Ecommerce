@@ -16,6 +16,10 @@ import SingleCategories from "./components/SingleCategories/SingleCategories.jsx
 import CheckOut from "./components/CheckOut/CheckOut.jsx";
 import AllOrders from "./components/AllOrders/AllOrders.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
+import ResetCode from "./components/ResetCode/ResetCode.jsx";
+import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
+import Wishlist from "./components/Wishlist/Wishlist.jsx";
 const App = () => {
   const queryclient = new QueryClient();
   const [userData, setUserData] = useState(null);
@@ -67,6 +71,18 @@ const App = () => {
           element: <Register />,
         },
         {
+          path: "/forgetpassword",
+          element: <ForgetPassword />,
+        },
+        {
+          path: "/resetcode",
+          element: <ResetCode />,
+        },
+        {
+          path: "/resetpassword",
+          element: <ResetPassword />,
+        },
+        {
           path: "/cart",
           element: (
             <ProtectedRoute>
@@ -101,6 +117,10 @@ const App = () => {
         {
           path: "/allorders",
           element: <AllOrders />,
+        },
+        {
+          path: "/wishlist",
+          element: <Wishlist />,
         },
       ],
     },

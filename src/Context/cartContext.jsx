@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 export const Cartcontext = createContext();
 
 export default function CartcontextProvider({ children }) {
+  const [homeLoading, setHomeLoading] = useState(true);
   const [cartCount, setCartCount] = useState(null);
   const [cartId, setCartId] = useState("");
   const baseUrl = "https://ecommerce.routemisr.com";
@@ -80,6 +81,28 @@ export default function CartcontextProvider({ children }) {
     );
     return data;
   };
+  const addToWishlist = async (id) => {
+    const data = await axios.post(
+      `${baseUrl}/api/v1/wishlist`,
+      {
+        productId: id,
+      },
+      { headers }
+    );
+    return data;
+  };
+
+  const getWishList = async () => {
+    const data = axios.get(`${baseUrl}/api/v1/wishlist`, { headers });
+    return data;
+  };
+
+  const deleteFromWishlist = async (id) => {
+    const data = await axios.delete(`${baseUrl}/api/v1/wishlist/${id}`, {
+      headers,
+    });
+    return data;
+  };
 
   const getAllOrders = async (page) => {
     const data = await axios.get(
@@ -88,6 +111,7 @@ export default function CartcontextProvider({ children }) {
     );
     return data;
   };
+
   useEffect(() => {
     getCartCount();
   }, [cartCount]);
@@ -107,6 +131,11 @@ export default function CartcontextProvider({ children }) {
         checkOut,
         cartId,
         getAllOrders,
+        homeLoading,
+        setHomeLoading,
+        addToWishlist,
+        getWishList,
+        deleteFromWishlist,
       }}
     >
       {children}

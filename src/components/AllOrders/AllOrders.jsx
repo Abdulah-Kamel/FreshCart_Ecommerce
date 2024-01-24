@@ -17,7 +17,6 @@ const AllOrders = () => {
     queryFn: () => getAllOrders(page),
     keepPreviousData: true,
   });
-  console.log(data);
 
   isError
     ? toast.error(isError, {
@@ -42,13 +41,13 @@ const AllOrders = () => {
   // }, []);
   return (
     <section>
-      <section className="container bg-main-light my-5 p-4 rounded">
-        <h1>All Orders:</h1>
-        {isLoading ? (
-          <section className="d-flex justify-content-center align-items-center w-100 mt-5">
-            <BeatLoader color="#0aad0a" size={35} />
-          </section>
-        ) : (
+      {isLoading ? (
+        <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
+          <BeatLoader color="#0aad0a" size={30} />
+        </section>
+      ) : (
+        <section className="container bg-main-light my-5 p-4 rounded">
+          <h1>All Orders:</h1>
           <section className="row g-3">
             {data?.data.data.slice(0, 10).map((order, index) => {
               return (
@@ -79,64 +78,67 @@ const AllOrders = () => {
               );
             })}
           </section>
-        )}
-        {isLoading ? null : (
-          <nav aria-label="..." className="d-flex justify-content-center mt-3">
-            <ul className="pagination">
-              <li
-                className={`page-item ${
-                  data?.data.metadata.prevPage ? "" : "disabled"
-                }`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => setPage(data?.data.metadata.prevPage)}
+          {isLoading ? null : (
+            <nav
+              aria-label="..."
+              className="d-flex justify-content-center mt-3"
+            >
+              <ul className="pagination">
+                <li
+                  className={`page-item ${
+                    data?.data.metadata.prevPage ? "" : "disabled"
+                  }`}
                 >
-                  Previous
-                </button>
-              </li>
-              {data?.data.metadata.prevPage ? (
-                <li className="page-item">
                   <button
                     className="page-link"
                     onClick={() => setPage(data?.data.metadata.prevPage)}
                   >
-                    {data?.data.metadata.prevPage}
+                    Previous
                   </button>
                 </li>
-              ) : null}
+                {data?.data.metadata.prevPage ? (
+                  <li className="page-item">
+                    <button
+                      className="page-link"
+                      onClick={() => setPage(data?.data.metadata.prevPage)}
+                    >
+                      {data?.data.metadata.prevPage}
+                    </button>
+                  </li>
+                ) : null}
 
-              <li className="page-item bg-main" aria-current="page">
-                <button
-                  className="page-link bg-main text-white"
-                  onClick={() => setPage(data?.data.metadata.currentPage)}
-                >
-                  {data?.data.metadata.currentPage}
-                </button>
-              </li>
-              {data?.data.metadata.nextPage ? (
+                <li className="page-item bg-main" aria-current="page">
+                  <button
+                    className="page-link bg-main text-white"
+                    onClick={() => setPage(data?.data.metadata.currentPage)}
+                  >
+                    {data?.data.metadata.currentPage}
+                  </button>
+                </li>
+                {data?.data.metadata.nextPage ? (
+                  <li className="page-item">
+                    <button
+                      className="page-link"
+                      onClick={() => setPage(data?.data.metadata.nextPage)}
+                    >
+                      {data?.data.metadata.nextPage}
+                    </button>
+                  </li>
+                ) : null}
+
                 <li className="page-item">
                   <button
                     className="page-link"
                     onClick={() => setPage(data?.data.metadata.nextPage)}
                   >
-                    {data?.data.metadata.nextPage}
+                    Next
                   </button>
                 </li>
-              ) : null}
-
-              <li className="page-item">
-                <button
-                  className="page-link"
-                  onClick={() => setPage(data?.data.metadata.nextPage)}
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
-        )}
-      </section>
+              </ul>
+            </nav>
+          )}
+        </section>
+      )}
     </section>
   );
 };

@@ -42,89 +42,91 @@ const CheckOut = () => {
     }, 500);
   }, []);
   return (
-    <section className="container my-5">
+    <>
       {loading ? (
-        <section className="d-flex justify-content-center align-items-center w-100 vh-100">
+        <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <BeatLoader color="#0aad0a" size={30} />
         </section>
       ) : (
-        <section>
-          <h2 className="fw-bold">CheckOut</h2>
-          <form onSubmit={formik.handleSubmit} className="mt-4">
-            <section className="mt-3">
-              <label htmlFor="details">Details:</label>
-              <input
-                type="details"
-                name="details"
-                id="details"
-                className="form-control mt-2"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.details}
-              />
-              {formik.touched.details && formik.errors.details ? (
-                <section className="alert alert-danger mt-2">
-                  {formik.errors.details}
-                </section>
-              ) : null}
-            </section>
-            <section className="mt-3">
-              <label htmlFor="phone">Phone:</label>
-              <input
-                type="phone"
-                name="phone"
-                id="phone"
-                className="form-control mt-2"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.phone}
-              />
-              {formik.touched.phone && formik.errors.phone ? (
-                <section className="alert alert-danger mt-2">
-                  {formik.errors.phone}
-                </section>
-              ) : null}
-            </section>
-            {error ? (
-              <section className="alert alert-danger my-4">
-                <p className="text-center fw-bold fs-5 mb-0">{error}</p>
+        <section className="container my-5">
+          <section>
+            <h2 className="fw-bold">CheckOut</h2>
+            <form onSubmit={formik.handleSubmit} className="mt-4">
+              <section className="mt-3">
+                <label htmlFor="details">Details:</label>
+                <input
+                  type="details"
+                  name="details"
+                  id="details"
+                  className="form-control mt-2"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.details}
+                />
+                {formik.touched.details && formik.errors.details ? (
+                  <section className="alert alert-danger mt-2">
+                    {formik.errors.details}
+                  </section>
+                ) : null}
               </section>
-            ) : null}
-            <section className="mt-3">
-              <label htmlFor="city">City:</label>
-              <input
-                type="city"
-                name="city"
-                id="city"
-                className="form-control mt-2"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.city}
-              />
-              {formik.touched.city && formik.errors.city ? (
-                <section className="alert alert-danger mt-2">
-                  {formik.errors.city}
+              <section className="mt-3">
+                <label htmlFor="phone">Phone:</label>
+                <input
+                  type="phone"
+                  name="phone"
+                  id="phone"
+                  className="form-control mt-2"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
+                />
+                {formik.touched.phone && formik.errors.phone ? (
+                  <section className="alert alert-danger mt-2">
+                    {formik.errors.phone}
+                  </section>
+                ) : null}
+              </section>
+              {error ? (
+                <section className="alert alert-danger my-4">
+                  <p className="text-center fw-bold fs-5 mb-0">{error}</p>
                 </section>
               ) : null}
-            </section>
-            {error ? (
-              <section className="alert alert-danger my-4">
-                <p className="text-center fw-bold fs-5 mb-0">{error}</p>
+              <section className="mt-3">
+                <label htmlFor="city">City:</label>
+                <input
+                  type="city"
+                  name="city"
+                  id="city"
+                  className="form-control mt-2"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.city}
+                />
+                {formik.touched.city && formik.errors.city ? (
+                  <section className="alert alert-danger mt-2">
+                    {formik.errors.city}
+                  </section>
+                ) : null}
               </section>
-            ) : null}
-            <section className="mt-3 d-flex justify-content-end">
-              <button className="btn bg-main text-white px-4 py-2">
-                {checkOutLodaing ? (
-                  <i className="fa fa-spinner fa-spin"></i>
-                ) : (
-                  "Submit"
-                )}
-              </button>
-            </section>
-          </form>
+              {error ? (
+                <section className="alert alert-danger my-4">
+                  <p className="text-center fw-bold fs-5 mb-0">{error}</p>
+                </section>
+              ) : null}
+              <section className="mt-3 d-flex justify-content-end">
+                <button className="btn bg-main text-white px-4 py-2">
+                  {checkOutLodaing ? (
+                    <i className="fa fa-spinner fa-spin"></i>
+                  ) : (
+                    "Submit"
+                  )}
+                </button>
+              </section>
+            </form>
+          </section>
         </section>
       )}
-    </section>
+    </>
   );
 };
 

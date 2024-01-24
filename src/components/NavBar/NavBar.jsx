@@ -102,6 +102,11 @@ const NavBar = ({ logout, userData }) => {
                     </Link>
                   </li>
                   <li className="dropdown-item">
+                    <Link className="nav-link" to={"/wishlist"}>
+                      Wishlist
+                    </Link>
+                  </li>
+                  <li className="dropdown-item">
                     <Link className="nav-link" onClick={logout}>
                       Logout
                     </Link>

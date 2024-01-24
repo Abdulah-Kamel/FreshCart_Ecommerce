@@ -1,53 +1,50 @@
 import { useFormik } from "formik";
-import styles from "./Login.module.css";
+import styles from "./ResetPassword.module.css";
 import * as Yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { string } from "i/lib/util";
 import { BeatLoader } from "react-spinners";
 
-const Login = ({ saveUserData }) => {
+const ResetPassword = () => {
   const [loading, setLoading] = useState(true);
-  const [loginLodaing, setLoginLodaing] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const baseUrl = "https://ecommerce.routemisr.com";
-  async function handleLogin(values) {
-    setLoginLodaing(true);
+  async function resetPassword(values) {
+    setSubmitLoading(true);
     let { data } = await axios
-      .post(`${baseUrl}/api/v1/auth/signin`, values)
+      .put(`${baseUrl}/api/v1/auth/resetPassword`, values)
       .catch((err) => {
         setError(
           `${string.capitalize(err.response.data.statusMsg)}, ${
             err.response.data.message
           }`
         );
-        setLoginLodaing(false);
+        setSubmitLoading(false);
       });
-    if (data.message === "success") {
-      setLoginLodaing(false);
-      localStorage.setItem("userToken", data.token);
-      navigate("/");
-      saveUserData();
+    console.log(data);
+    if (data.token) {
+      setSubmitLoading(false);
+      navigate("/login");
     }
   }
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
+      newPassword: "",
     },
     onSubmit: (values) => {
-      handleLogin(values);
+      resetPassword(values);
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-      password: Yup.string()
+      email: Yup.string().email().required("Email is required"),
+      newPassword: Yup.string()
         .matches(
-          /^[A-Z][A-Za-z0-9]{7,}/,
-          "Password must be at least 8 characters long and contain at least one uppercase letter"
+          /^[A-Z][A-Za-z0-9!@#$%^&*]{7,}$/,
+          "Password should start with uppercase and have at least 8 characters"
         )
         .required("Password is required"),
     }),
@@ -60,13 +57,13 @@ const Login = ({ saveUserData }) => {
   return (
     <>
       {loading ? (
-        <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
+        <section className="position-absolute top-0 start-0 end-0 bottom-0 bg-main-light d-flex justify-content-center align-items-center w-100 vh-100">
           <BeatLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="container my-5">
           <section>
-            <h2 className="fw-bold">Login</h2>
+            <h2>Reset Password</h2>
             <form onSubmit={formik.handleSubmit} className="mt-4">
               <section className="mt-3">
                 <label htmlFor="email">Email:</label>
@@ -77,7 +74,7 @@ const Login = ({ saveUserData }) => {
                   className="form-control mt-2"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  value={formik.values.email}
+                  value={formik.values.email.trim()}
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <section className="alert alert-danger mt-2">
@@ -86,19 +83,19 @@ const Login = ({ saveUserData }) => {
                 ) : null}
               </section>
               <section className="mt-3">
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">New Password:</label>
                 <input
                   type="password"
-                  name="password"
+                  name="newPassword"
                   id="password"
                   className="form-control mt-2"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  value={formik.values.password}
+                  value={formik.values.newPassword.trim()}
                 />
-                {formik.touched.password && formik.errors.password ? (
+                {formik.touched.newPassword && formik.errors.newPassword ? (
                   <section className="alert alert-danger mt-2">
-                    {formik.errors.password}
+                    {formik.errors.newPassword}
                   </section>
                 ) : null}
               </section>
@@ -108,21 +105,15 @@ const Login = ({ saveUserData }) => {
                 </section>
               ) : null}
               <section className="mt-3 d-flex justify-content-end align-items-center">
-                <p>
-                  <span>Forget your password?</span>{" "}
-                  <Link to="/forgetpassword" className="text-main register">
-                    reset password
-                  </Link>
-                </p>
                 <button
                   type="submit"
                   className={`btn bg-main text-white ms-auto px-3 py-2`}
                   disabled={!formik.isValid}
                 >
-                  {loginLodaing ? (
+                  {submitLoading ? (
                     <i className="fas fa-spinner fa-spin"></i>
                   ) : (
-                    "Login"
+                    "submit"
                   )}
                 </button>
               </section>
@@ -134,4 +125,4 @@ const Login = ({ saveUserData }) => {
   );
 };
 
-export default Login;
+export default ResetPassword;

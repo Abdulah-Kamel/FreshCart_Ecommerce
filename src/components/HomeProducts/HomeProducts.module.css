@@ -1,0 +1,19 @@
+.cursor_pointer {
+  cursor: pointer;
+}
+
+.flip {
+  animation: pop 0.7s 2 normal;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    scale: 1.5;
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -8,7 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 const Products = () => {
   // const [products, setProducts] = useState(null);
   // const [loading, setLoading] = useState(true);
-  const { getProducts, addToCart } = useContext(Cartcontext);
+  const { getProducts, addToCart, addToWishlist } = useContext(Cartcontext);
+  const [wishList, setWishList] = useState([]);
 
   // const getAllProducts = async (page) => {
   //   setLoading(true);
@@ -49,6 +50,29 @@ const Products = () => {
     }
   };
 
+  const addToWishlistHandler = async (id) => {
+    const index = wishList.indexOf(id);
+    if (index === -1) {
+      const updatedWishList = [...wishList, id];
+      setWishList(updatedWishList);
+    }
+    const data = await addToWishlist(id);
+    if (data.data.status == "success") {
+      toast.success(data.data.message, {
+        position: "top-right",
+        duration: 1000,
+        className: "text-white bg-success",
+      });
+      setWishList(id);
+    } else {
+      toast.error(data.data.message, {
+        position: "top-right",
+        duration: 1000,
+        className: "text-white bg-danger",
+      });
+    }
+  };
+
   // useEffect(() => {
   //   getAllProducts();
   // }, []);
@@ -66,9 +90,21 @@ const Products = () => {
             {data?.data.map((product, index) => {
               return (
                 <section
-                  className="col-xl-3 col-lg-4 col-md-6 overflow-hidden"
+                  className="col-xl-3 col-lg-4 col-md-6 overflow-hidden position-relative"
                   key={index}
                 >
+                  <section
+                    className={`${styles.cursor_pointer} position-absolute top-0 end-0 me-4 mt-3`}
+                    onClick={() => addToWishlistHandler(product._id)}
+                  >
+                    {wishList.includes(product._id) ? (
+                      <i
+                        className={`fa-solid fa-heart fa-2xl text-success ${styles.flip}`}
+                      ></i>
+                    ) : (
+                      <i className="fa-regular fa-heart fa-2xl"></i>
+                    )}
+                  </section>
                   <section className="px-3 py-2 product">
                     <Link
                       to={`/products/${product._id}`}

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { string } from "i/lib/util";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 
 const ResetCode = () => {
   const [loading, setLoading] = useState(true);
@@ -50,7 +50,7 @@ const ResetCode = () => {
     <>
       {loading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
-          <BeatLoader color="#0aad0a" size={30} />
+          <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="container my-5">

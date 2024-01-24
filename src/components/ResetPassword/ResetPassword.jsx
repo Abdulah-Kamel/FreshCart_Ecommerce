@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { string } from "i/lib/util";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(true);
@@ -58,7 +58,7 @@ const ResetPassword = () => {
     <>
       {loading ? (
         <section className="position-absolute top-0 start-0 end-0 bottom-0 bg-main-light d-flex justify-content-center align-items-center w-100 vh-100">
-          <BeatLoader color="#0aad0a" size={30} />
+          <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="container my-5">

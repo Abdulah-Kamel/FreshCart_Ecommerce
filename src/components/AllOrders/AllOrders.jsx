@@ -3,7 +3,7 @@ import styles from "./AllOrders.module.css";
 import { Cartcontext } from "../../Context/cartContext";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 const AllOrders = () => {
   // const [orders, setOrders] = useState(null);
@@ -43,7 +43,7 @@ const AllOrders = () => {
     <section>
       {isLoading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
-          <BeatLoader color="#0aad0a" size={30} />
+          <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="container bg-main-light my-5 p-4 rounded">

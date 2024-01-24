@@ -3,7 +3,7 @@ import styles from "./SingleProduct.module.css";
 import { useParams } from "react-router-dom";
 import { Cartcontext } from "../../Context/cartContext";
 import Slider from "react-slick";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 
 const SingleProduct = () => {
@@ -59,7 +59,7 @@ const SingleProduct = () => {
     <>
       {loading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
-          <BeatLoader color="#0aad0a" size={30} />
+          <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="py-5">

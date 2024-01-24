@@ -1,8 +1,7 @@
 import styles from "./Wishlist.module.css";
 import { useContext, useEffect, useState } from "react";
 import { Cartcontext } from "../../Context/cartContext";
-import { useQuery } from "@tanstack/react-query";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 const Wishlist = () => {
@@ -55,7 +54,7 @@ const Wishlist = () => {
       <ToastContainer />
       {isLoading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
-          <BeatLoader color="#0aad0a" size={30} />
+          <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="container  my-5 p-4 rounded">

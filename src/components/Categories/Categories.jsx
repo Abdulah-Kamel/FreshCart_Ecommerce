@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./Categories.module.css";
 import { Cartcontext } from "../../Context/cartContext";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 const Categories = () => {
@@ -26,7 +26,7 @@ const Categories = () => {
     <>
       {isLoading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
-          <BeatLoader color="#0aad0a" size={30} />
+          <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="py-5">

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./SingleCategories.module.css";
 import { Cartcontext } from "../../Context/cartContext";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import NotFound from "../NotFound/NotFound";
 const SingleCategories = () => {
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,7 @@ const SingleCategories = () => {
         <h1>Category Products:</h1>
         {loading ? (
           <section className="d-flex justify-content-center align-items-center w-100">
-            <BeatLoader color="#0aad0a" size={30} />
+            <PulseLoader color="#0aad0a" size={30} />
           </section>
         ) : products.length > 0 ? (
           products.map((product, index) => {

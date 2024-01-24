@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./HomeProducts.module.css";
 import { Cartcontext } from "../../Context/cartContext";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
@@ -83,7 +83,7 @@ const HomeProducts = () => {
       <section className="row gx-3 gy-5">
         {isLoading ? (
           <section className="d-flex justify-content-center align-items-center w-100">
-            <BeatLoader color="#0aad0a" size={30} />
+            <PulseLoader color="#0aad0a" size={30} />
           </section>
         ) : (
           data?.data.map((product, index) => {

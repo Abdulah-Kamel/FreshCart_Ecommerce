@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import styles from "./PopularCategores.module.css";
-import { BeatLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { Cartcontext } from "../../Context/cartContext.jsx";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";

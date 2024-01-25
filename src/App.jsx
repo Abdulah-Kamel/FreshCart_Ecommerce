@@ -1,4 +1,4 @@
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Products/Products";
@@ -35,7 +35,7 @@ const App = () => {
       saveUserData();
     }
   }, []);
-  const router = createHashRouter([
+  const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout userData={userData} />,

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { string } from "i/lib/util";
 import { PulseLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const ResetCode = () => {
   const [loading, setLoading] = useState(true);
@@ -48,6 +49,10 @@ const ResetCode = () => {
   }, []);
   return (
     <>
+      <Helmet>
+      <title>Reset Code</title>
+      <meta name="description" content="Reset Code page" />
+    </Helmet>
       {loading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />

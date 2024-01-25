@@ -3,8 +3,9 @@ import styles from "./Products.module.css";
 import { Cartcontext } from "../../Context/cartContext";
 import { PulseLoader } from "react-spinners";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 const Products = () => {
   // const [products, setProducts] = useState(null);
   // const [loading, setLoading] = useState(true);
@@ -79,7 +80,10 @@ const Products = () => {
 
   return (
     <>
-      <ToastContainer limit={4} newestOnTop />
+      <Helmet>
+      <title>Products</title>
+      <meta name="description" content="Products page" />
+    </Helmet>
       {isLoading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />

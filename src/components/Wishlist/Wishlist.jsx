@@ -2,8 +2,9 @@ import styles from "./Wishlist.module.css";
 import { useContext, useEffect, useState } from "react";
 import { Cartcontext } from "../../Context/cartContext";
 import { PulseLoader } from "react-spinners";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const Wishlist = () => {
   // const [page, setPage] = useState(1);
 
@@ -18,7 +19,6 @@ const Wishlist = () => {
 
   const getwishList = async () => {
     const data = await getWishList();
-    console.log(data);
     setWishList(data.data.data);
     setIsLoading(false);
   };
@@ -30,7 +30,6 @@ const Wishlist = () => {
       duration: 500,
     });
     const data = await deleteFromWishlist(id);
-    console.log(data);
     if (data.data.status == "success") {
       toast.success(data.data.message, {
         position: "top-right",
@@ -51,7 +50,10 @@ const Wishlist = () => {
   }, [wishList]);
   return (
     <section>
-      <ToastContainer />
+      <Helmet>
+        <title>WishList</title>
+        <meta name="description" content="WishList page" />
+      </Helmet>
       {isLoading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />

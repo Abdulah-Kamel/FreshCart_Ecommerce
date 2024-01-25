@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Products/Products";
@@ -20,6 +20,8 @@ import ForgetPassword from "./components/ForgetPassword/ForgetPassword.jsx";
 import ResetCode from "./components/ResetCode/ResetCode.jsx";
 import ResetPassword from "./components/ResetPassword/ResetPassword.jsx";
 import Wishlist from "./components/Wishlist/Wishlist.jsx";
+import { ToastContainer } from "react-toastify";
+import { Offline } from "react-detect-offline";
 const App = () => {
   const queryclient = new QueryClient();
   const [userData, setUserData] = useState(null);
@@ -33,7 +35,7 @@ const App = () => {
       saveUserData();
     }
   }, []);
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: <Layout userData={userData} />,
@@ -130,6 +132,12 @@ const App = () => {
       <ContextProvider>
         <RouterProvider router={router}></RouterProvider>
       </ContextProvider>
+      <ToastContainer limit={4} newestOnTop />
+      <Offline>
+        <section className="position-fixed mt-3 me-1 p-3 rounded  top-0 end-0 bg-danger text-white d-flex justify-content-center align-items-center">
+          <p className="mb-0">you are Offline!</p>
+        </section>
+      </Offline>
     </QueryClientProvider>
   );
 };

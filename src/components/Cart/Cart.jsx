@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./Cart.module.css";
 import { Cartcontext } from "../../Context/cartContext";
 import { PulseLoader } from "react-spinners";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Cart = () => {
   const [loading, setLoading] = useState(true);
@@ -72,13 +73,16 @@ const Cart = () => {
   }, [cart]);
   return (
     <>
+      <Helmet>
+        <title>Cart</title>
+        <meta name="description" content="Cart page" />
+      </Helmet>
       {loading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <>
-          <ToastContainer limit={4} newestOnTop />
           <section className={`container my-5 p-4 ${styles.bg_light_dark}`}>
             <h3 className="fw-bold">Shop Cart:</h3>
 

@@ -4,6 +4,7 @@ import { Cartcontext } from "../../Context/cartContext";
 import { PulseLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 const Categories = () => {
   // const [categories, setCategories] = useState(null);
   // const [loading, setLoading] = useState(true);
@@ -24,6 +25,10 @@ const Categories = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Categories</title>
+      <meta name="description" content="Categories page" />
+    </Helmet>
       {isLoading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />

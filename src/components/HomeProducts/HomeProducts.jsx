@@ -79,7 +79,6 @@ const HomeProducts = () => {
 
   return (
     <>
-      <ToastContainer limit={4} newestOnTop />
       <section className="row gx-3 gy-5">
         {isLoading ? (
           <section className="d-flex justify-content-center align-items-center w-100">

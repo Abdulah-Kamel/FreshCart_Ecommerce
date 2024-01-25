@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import { Cartcontext } from "../../Context/cartContext";
 import Slider from "react-slick";
 import { PulseLoader } from "react-spinners";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const SingleProduct = () => {
   const settings = {
@@ -30,7 +31,6 @@ const SingleProduct = () => {
 
   const getProduct = async () => {
     const { data } = await getSpecificProduct(params.productId);
-    console.log(data);
     setProduct(data);
     setLoading(false);
   };
@@ -57,13 +57,16 @@ const SingleProduct = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Product</title>
+        <meta name="description" content="Product page" />
+      </Helmet>
       {loading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />
         </section>
       ) : (
         <section className="py-5">
-          <ToastContainer />
           <section className="container">
             <section className="row g-0 gy-5 g-md-5">
               <section className="col-md-4">

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { string } from "i/lib/util";
 import { PulseLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(true);
@@ -25,7 +26,6 @@ const ResetPassword = () => {
         );
         setSubmitLoading(false);
       });
-    console.log(data);
     if (data.token) {
       setSubmitLoading(false);
       navigate("/login");
@@ -56,6 +56,10 @@ const ResetPassword = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Reset Password</title>
+        <meta name="description" content="Reset Password page" />
+      </Helmet>
       {loading ? (
         <section className="position-absolute top-0 start-0 end-0 bottom-0 bg-main-light d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />

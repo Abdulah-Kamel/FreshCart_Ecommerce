@@ -11,7 +11,8 @@ import { Shopping_cart_icon } from "../../assets/images";
 const Products = () => {
   // const [products, setProducts] = useState(null);
   // const [loading, setLoading] = useState(true);
-  const { getProducts, addToCart, addToWishlist } = useContext(Cartcontext);
+  const { getProducts, addToCart, addToWishlist, getWishList } =
+    useContext(Cartcontext);
   const [wishList, setWishList] = useState([]);
 
   // const getAllProducts = async (page) => {
@@ -53,27 +54,49 @@ const Products = () => {
     }
   };
 
+  let {
+    data: wishListData,
+    isLoading: wishListLoading,
+    isError: wishListError,
+  } = useQuery({
+    queryKey: ["wishList"],
+    queryFn: getWishList,
+    keepPreviousData: true,
+  });
+
+  const wishListObject = {};
+  wishListData?.data?.data?.map((item) => {
+    wishListObject[item.id] = true;
+  });
+
   const addToWishlistHandler = async (id) => {
     const index = wishList.indexOf(id);
     if (index === -1) {
       const updatedWishList = [...wishList, id];
       setWishList(updatedWishList);
-    }
-    const data = await addToWishlist(id);
-    if (data.data.status == "success") {
-      toast.success(data.data.message, {
-        position: "top-right",
-        duration: 1000,
-        className: "text-white bg-success",
-      });
-      setWishList(id);
     } else {
-      toast.error(data.data.message, {
-        position: "top-right",
-        duration: 1000,
-        className: "text-white bg-danger",
-      });
+      wishList.splice(index, 1);
     }
+    const data = await addToWishlist(id)
+      .then((data) => {
+        if (data.data.status == "success") {
+          toast.success(data.data.message, {
+            position: "top-right",
+            duration: 500,
+            className: "text-white bg-success",
+          });
+          const updatedWishList = [...wishList, id];
+          setWishList(updatedWishList);
+        }
+      })
+      .catch((error) => {
+        toast.error(error, {
+          position: "top-right",
+          duration: 500,
+          className: "text-white bg-danger",
+        });
+        wishList.splice(index, 1);
+      });
   };
 
   // useEffect(() => {
@@ -103,7 +126,8 @@ const Products = () => {
                     className={`${styles.cursor_pointer} position-absolute top-0 end-0 me-4 mt-3`}
                     onClick={() => addToWishlistHandler(product._id)}
                   >
-                    {wishList.includes(product._id) ? (
+                    {wishList.includes(product._id) ||
+                    wishListObject[product._id] === true ? (
                       <i
                         className={`fa-solid fa-heart fa-2xl text-success ${styles.flip}`}
                       ></i>

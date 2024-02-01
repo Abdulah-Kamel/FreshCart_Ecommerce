@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images";
 const AllOrders = () => {
   // const [orders, setOrders] = useState(null);
   // const [loading, setLoading] = useState(true);
@@ -18,6 +20,8 @@ const AllOrders = () => {
     queryFn: () => getAllOrders(page),
     keepPreviousData: true,
   });
+
+  console.log(data?.data.data);
 
   isError
     ? toast.error(isError, {
@@ -63,10 +67,6 @@ const AllOrders = () => {
                       {order.createdAt}
                     </p>
                     <p>
-                      <span className="fw-bold me-1">Order ID:</span>{" "}
-                      {order._id}
-                    </p>
-                    <p>
                       <span className="fw-bold me-1">Status:</span>{" "}
                       {order.isDelivered ? "Delivered" : "Not Delivered"}
                     </p>
@@ -78,6 +78,24 @@ const AllOrders = () => {
                       <span className="fw-bold me-1">Total:</span> $
                       {order.totalOrderPrice}
                     </p>
+                    <section>
+                      <p className="fw-bold">Products:</p>
+                      <section className="d-flex align-items-center">
+                        {order.cartItems.map((product, index) => {
+                          return (
+                            <picture key={index} className="me-2">
+                              <LazyLoadImage
+                                src={product.product.imageCover}
+                                alt=""
+                                width={"100px"}
+                                placeholderSrc={Shopping_cart_icon}
+                                effect="blur"
+                              />
+                            </picture>
+                          );
+                        })}
+                      </section>
+                    </section>
                   </section>
                 </section>
               );

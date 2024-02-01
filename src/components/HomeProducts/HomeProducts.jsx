@@ -11,7 +11,8 @@ const HomeProducts = () => {
   // const [products, setProducts] = useState(null);
   // const [loading, setLoading] = useState(true);
   const [wishList, setWishList] = useState([]);
-  const { getProducts, addToCart, addToWishlist } = useContext(Cartcontext);
+  const { getProducts, addToCart, addToWishlist, getWishList } =
+    useContext(Cartcontext);
 
   // const getAllProducts = async (page) => {
   //   setLoading(true);
@@ -26,6 +27,20 @@ const HomeProducts = () => {
     queryKey: ["products", page],
     queryFn: () => getProducts(page),
     keepPreviousData: true,
+  });
+  let {
+    data: wishListData,
+    isLoading: wishListLoading,
+    isError: wishListError,
+  } = useQuery({
+    queryKey: ["wishList"],
+    queryFn: getWishList,
+    keepPreviousData: true,
+  });
+
+  const wishListObject = {};
+  wishListData?.data?.data?.map((item) => {
+    wishListObject[item.id] = true;
   });
 
   const addToWishlistHandler = async (id) => {
@@ -104,7 +119,8 @@ const HomeProducts = () => {
                   className={`${styles.cursor_pointer} position-absolute top-0 end-0 me-4 mt-3`}
                   onClick={() => addToWishlistHandler(product._id)}
                 >
-                  {wishList.includes(product._id) ? (
+                  {wishList.includes(product._id) ||
+                  wishListObject[product._id] === true ? (
                     <i
                       className={`fa-solid fa-heart fa-2xl text-success ${styles.flip}`}
                     ></i>
@@ -131,7 +147,10 @@ const HomeProducts = () => {
                       {product.category.name}
                     </p>
                     <p className="fw-bold fs-5">
-                      {product.title.split(" ").slice(0, 2).join(" ")}
+                      {product.title.split(" ").slice(0, 2).join(" ").length >
+                      15
+                        ? product.title.split(" ").slice(0, 1)
+                        : product.title.split(" ").slice(0, 2).join("  ")}
                     </p>
                     <section className="d-flex justify-content-between align-items-center">
                       <span className="fw-bold">

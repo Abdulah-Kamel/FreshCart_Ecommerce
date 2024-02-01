@@ -6,7 +6,10 @@ import {
   slider_1,
   slider_2,
   slider_3,
+  Shopping_cart_icon,
 } from "../../assets/images/index.js";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 const HomeSlider = () => {
   const settings = {
     dots: true,
@@ -28,7 +31,7 @@ const HomeSlider = () => {
         <Slider {...settings}>
           <section>
             <picture>
-              <img
+              <LazyLoadImage
                 src={slider_1}
                 alt="vegtables backed in a bag"
                 className="w-100 rounded rounded-end-0 h-100"
@@ -37,16 +40,17 @@ const HomeSlider = () => {
           </section>
           <section>
             <picture>
-              <img
+              <LazyLoadImage
                 src={slider_2}
                 alt="Red vielet chocolate"
                 className="w-100 rounded rounded-end-0 h-100"
+                placeholderSrc={Shopping_cart_icon}
               />
             </picture>
           </section>
           <section>
             <picture>
-              <img
+              <LazyLoadImage
                 src={slider_3}
                 alt="lasta bancakes"
                 className="w-100 rounded rounded-end-0 h-100"
@@ -57,14 +61,14 @@ const HomeSlider = () => {
       </section>
       <section className={` ${styles.width_30} d-flex flex-column`}>
         <picture className="h-100">
-          <img
+          <LazyLoadImage
             src={slider2}
             alt="vegtables in a basket"
             className="w-100 rounded rounded-start-0 rounded-bottom-0 h-100"
           />
         </picture>
         <picture className="h-100 pb-1">
-          <img
+          <LazyLoadImage
             src={blog_2}
             alt="vegtables on a table"
             className="w-100 rounded rounded-start-0 rounded-top-0 h-100"

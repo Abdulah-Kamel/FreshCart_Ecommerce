@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images";
 const Products = () => {
   // const [products, setProducts] = useState(null);
   // const [loading, setLoading] = useState(true);
@@ -81,9 +83,9 @@ const Products = () => {
   return (
     <>
       <Helmet>
-      <title>Products</title>
-      <meta name="description" content="Products page" />
-    </Helmet>
+        <title>Products</title>
+        <meta name="description" content="Products page" />
+      </Helmet>
       {isLoading ? (
         <section className="position-absolute bg-main-light top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center w-100 vh-100">
           <PulseLoader color="#0aad0a" size={30} />
@@ -114,10 +116,12 @@ const Products = () => {
                       to={`/products/${product._id}`}
                       className="text-decoration-none"
                     >
-                      <img
+                      <LazyLoadImage
                         src={product.imageCover}
                         alt={product.title}
                         className="w-100"
+                        placeholderSrc={Shopping_cart_icon}
+                        effect="blur"
                       />
                     </Link>
 

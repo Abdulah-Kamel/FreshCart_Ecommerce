@@ -6,6 +6,8 @@ import Slider from "react-slick";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images";
 
 const SingleProduct = () => {
   const settings = {
@@ -75,10 +77,12 @@ const SingleProduct = () => {
                     return (
                       <section key={index}>
                         <picture>
-                          <img
+                          <LazyLoadImage
                             src={image}
                             alt="vegtables backed in a bag"
                             className="w-100 rounded"
+                            placeholderSrc={Shopping_cart_icon}
+                            effect="blur"
                           />
                         </picture>
                       </section>

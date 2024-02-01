@@ -5,6 +5,8 @@ import { PulseLoader } from "react-spinners";
 import { Cartcontext } from "../../Context/cartContext.jsx";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images/index.js";
 
 const PopularCategores = () => {
   // const [loading, setLoading] = useState(true);
@@ -78,11 +80,13 @@ const PopularCategores = () => {
           {data?.data.map((category) => (
             <picture key={category._id}>
               <Link to={`/categories/${category._id}`}>
-                <img
+                <LazyLoadImage
                   src={category.image}
                   alt=""
                   className="w-100"
                   height={200}
+                  placeholderSrc={Shopping_cart_icon}
+                  effect="blur"
                 />
               </Link>
               <p className="text-center">{category.name}</p>

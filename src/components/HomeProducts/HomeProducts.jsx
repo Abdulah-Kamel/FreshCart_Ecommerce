@@ -5,6 +5,8 @@ import { PulseLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images";
 const HomeProducts = () => {
   // const [products, setProducts] = useState(null);
   // const [loading, setLoading] = useState(true);
@@ -108,10 +110,12 @@ const HomeProducts = () => {
                     to={`/products/${product._id}`}
                     className="text-decoration-none"
                   >
-                    <img
+                    <LazyLoadImage
                       src={product.imageCover}
                       alt={product.title}
                       className="w-100"
+                      placeholderSrc={Shopping_cart_icon}
+                      effect="blur"
                     />
                   </Link>
 

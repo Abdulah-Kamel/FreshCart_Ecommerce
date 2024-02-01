@@ -5,6 +5,8 @@ import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images";
 
 const Cart = () => {
   const [loading, setLoading] = useState(true);
@@ -102,11 +104,13 @@ const Cart = () => {
                             <>
                               <section className="col-md-2" key={index}>
                                 <section>
-                                  <img
+                                  <LazyLoadImage
                                     src={product.product.imageCover}
                                     alt={product.product.title}
                                     className="w-100"
                                     width={"200px"}
+                                    placeholderSrc={Shopping_cart_icon}
+                                    effect="blur"
                                   />
                                 </section>
                               </section>

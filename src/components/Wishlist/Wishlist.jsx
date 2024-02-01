@@ -5,6 +5,8 @@ import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images";
 const Wishlist = () => {
   // const [page, setPage] = useState(1);
 
@@ -71,10 +73,12 @@ const Wishlist = () => {
                   >
                     <section className="px-3 py-2 product">
                       <Link to={`/products/${product._id}`}>
-                        <img
+                        <LazyLoadImage
                           src={product.imageCover}
                           alt={product.title}
                           className="w-100"
+                          placeholderSrc={Shopping_cart_icon}
+                          effect="blur"
                         />
                       </Link>
 

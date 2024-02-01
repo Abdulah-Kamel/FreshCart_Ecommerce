@@ -5,6 +5,8 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import NotFound from "../NotFound/NotFound";
 import { Helmet } from "react-helmet";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Shopping_cart_icon } from "../../assets/images";
 const SingleCategories = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState(null);
@@ -51,10 +53,12 @@ const SingleCategories = () => {
                       to={`/products/${product._id}`}
                       className="text-decoration-none"
                     >
-                      <img
+                      <LazyLoadImage
                         src={product.imageCover}
                         alt={product.title}
                         className="w-100"
+                        placeholderSrc={Shopping_cart_icon}
+                        effect="blur"
                       />
                     </Link>
 

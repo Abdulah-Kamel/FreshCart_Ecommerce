@@ -16,6 +16,7 @@ import amazonPay from "./Amazon_Pay_logo.svg";
 import americanExpress from "./american-express.svg";
 import googlePlay from "./Google_Play_Store_badge_EN.svg";
 import appleStore from "./Download_on_the_App_Store_Badge.svg";
+import Shopping_cart_icon from "./Shopping_cart_icon.svg";
 
 export {
   banner_4,
@@ -36,4 +37,5 @@ export {
   americanExpress,
   googlePlay,
   appleStore,
+  Shopping_cart_icon,
 };

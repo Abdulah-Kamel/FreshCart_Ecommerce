@@ -33,22 +33,29 @@ const HomeProducts = () => {
     if (index === -1) {
       const updatedWishList = [...wishList, id];
       setWishList(updatedWishList);
-    }
-    const data = await addToWishlist(id);
-    if (data.data.status == "success") {
-      toast.success(data.data.message, {
-        position: "top-right",
-        duration: 1000,
-        className: "text-white bg-success",
-      });
-      setWishList(id);
     } else {
-      toast.error(data.data.message, {
-        position: "top-right",
-        duration: 1000,
-        className: "text-white bg-danger",
-      });
+      wishList.splice(index, 1);
     }
+    const data = await addToWishlist(id)
+      .then((data) => {
+        if (data.data.status == "success") {
+          toast.success(data.data.message, {
+            position: "top-right",
+            duration: 1000,
+            className: "text-white bg-success",
+          });
+          const updatedWishList = [...wishList, id];
+          setWishList(updatedWishList);
+        }
+      })
+      .catch((error) => {
+        toast.error(error, {
+          position: "top-right",
+          duration: 1000,
+          className: "text-white bg-danger",
+        });
+        wishList.splice(index, 1);
+      });
   };
 
   isError

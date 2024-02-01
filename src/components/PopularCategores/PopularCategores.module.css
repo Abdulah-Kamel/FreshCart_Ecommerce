@@ -1,0 +1,9 @@
+.slider_image {
+  height: 200px;
+}
+
+@media screen and (max-width: 480px) {
+  .slider_image {
+    height: 350px;
+  }
+}

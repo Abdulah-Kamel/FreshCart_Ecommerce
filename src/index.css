@@ -65,12 +65,13 @@ body {
   background-color: #cecece !important;
   border-radius: 4px;
   cursor: pointer;
-  &:hover {
+}
+.slick-dots li button:hover {
     background-color: #979797 !important;
-  }
-  &::before {
-    display: none;
-  }
+}
+
+.slick-dots li button:before{
+  display: none;
 }
 
 .slick-dots li.slick-active button {
